@@ -21,7 +21,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 const navItems = ["About", "Skills", "Experience", "Education", "Contact"];
-const roles = ["Full Stack Web Developer", "Laravel Developer", "WordPress Developer", "Web Design Trainer"];
+const roles = ["Full Stack Web Developer", "Laravel Developer", "WordPress Developer", "Web Design Faculty"];
 
 const skillGroups = [
   { title: "Frameworks & CMS", skills: [["Laravel", 90], ["WordPress", 92], ["Theme Development", 88]] },
@@ -33,27 +33,38 @@ const skillGroups = [
 
 const experience = [
   {
+    role: "Web Design Faculty",
+    company: "Alpha Digital Academy",
+    date: "February 2026 — Present",
+    points: [
+      "Mentor aspiring web designers in HTML, CSS, JavaScript, and modern design principles",
+      "Develop curriculum and practical hands-on training materials",
+      "Guide students through real-world web design projects and responsive interfaces",
+      "Foster creativity, design thinking, and practical learning",
+    ],
+  },
+  {
     role: "Laravel Developer",
     company: "ecraftz",
-    date: "January 2025 — Present",
+    date: "January 2025 — February 2026",
     points: [
-      "Engineer scalable web applications using Laravel and MySQL",
-      "Optimize application performance and architecture",
-      "Develop custom WordPress themes and responsive interfaces",
-      "Build Core PHP solutions for client requirements",
-      "Collaborate across the full development lifecycle",
+      "Engineered scalable web applications using Laravel and MySQL",
+      "Optimized application performance and architecture",
+      "Developed custom WordPress themes and responsive interfaces",
+      "Built Core PHP solutions for client requirements",
+      "Collaborated across the full development lifecycle",
     ],
   },
   {
     role: "Web Design Trainer",
     company: "e-academy",
-    date: "August 2024 — Present",
+    date: "August 2024 — February 2026",
     points: [
-      "Mentor aspiring web designers",
-      "Teach HTML, CSS, JavaScript, and modern design principles",
-      "Develop curriculum and training materials",
-      "Guide students through real-world projects",
-      "Foster creativity and practical learning",
+      "Mentored aspiring web designers",
+      "Taught HTML, CSS, JavaScript, and modern design principles",
+      "Developed curriculum and training materials",
+      "Guided students through real-world projects",
+      "Fostered creativity and practical learning",
     ],
   },
 ];
@@ -195,11 +206,11 @@ export function Portfolio() {
         <SectionTitle index="01" label="About" title="Code with clarity. Design with purpose." />
         <div className="grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:gap-20">
           <Reveal className="space-y-6 text-lg leading-relaxed text-muted-foreground md:text-xl">
-            <p>Passionate Full Stack Developer with hands-on experience in building robust web applications using <strong>Laravel and WordPress</strong>. Currently contributing to innovative projects at ecraftz while empowering the next generation of web designers as a trainer at e-academy.</p>
+            <p>Passionate Full Stack Developer with hands-on experience in building robust web applications using <strong>Laravel and WordPress</strong>. Currently empowering the next generation of web designers as a <strong>Web Design Faculty at Alpha Digital Academy</strong>.</p>
             <p>I transform complex problems into elegant, user-friendly solutions and write clean, maintainable code. My expertise bridges backend development and creative design—building applications that are as functional as they are visually compelling.</p>
           </Reveal>
           <Reveal delay={0.15} className="grid grid-cols-2 border border-border bg-card/50 backdrop-blur-md">
-            {[["02", "Active roles"], ["15+", "Core skills"], ["100%", "Curiosity"], ["∞", "Ideas"]].map(([value, label]) => (
+            {[["01", "Current role"], ["15+", "Core skills"], ["100%", "Curiosity"], ["∞", "Ideas"]].map(([value, label]) => (
               <div key={label} className="border border-border p-6"><div className="mb-2 text-3xl font-semibold text-primary md:text-4xl">{value}</div><div className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">{label}</div></div>
             ))}
           </Reveal>

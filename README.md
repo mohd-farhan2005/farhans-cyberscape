@@ -60,7 +60,7 @@ About Me
 
 Content:
 
-Passionate Full Stack Developer with hands-on experience in building robust web applications using Laravel and WordPress. Currently contributing to innovative projects at ecraftz while empowering the next generation of web designers as a trainer at e-academy.
+Passionate Full Stack Developer with hands-on experience in building robust web applications using Laravel and WordPress. Currently empowering the next generation of web designers as a Web Design Faculty at Alpha Digital Academy.
 
 I specialize in transforming complex problems into elegant, user-friendly solutions and writing clean, maintainable code. My expertise bridges backend development and creative design, allowing me to build applications that are both functional and visually compelling.
 
@@ -106,10 +106,22 @@ Experience Section
 
 Create a vertical animated timeline.
 
+Web Design Faculty
+
+Alpha Digital Academy
+February 2026 – Present
+
+Responsibilities:
+
+Mentor aspiring web designers in HTML, CSS, JavaScript, and modern design principles
+Develop curriculum and practical hands-on training materials
+Guide students through real-world web design projects and responsive interfaces
+Foster creativity, design thinking, and practical learning
+
 Laravel Developer
 
 ecraftz
-January 2025 – Present
+January 2025 – February 2026
 
 Responsibilities:
 
@@ -119,10 +131,11 @@ Develop custom WordPress themes
 Create responsive user interfaces
 Build Core PHP solutions for client requirements
 Collaborate across the full development lifecycle
+
 Web Design Trainer
 
 e-academy
-August 2024 – Present
+August 2024 – February 2026
 
 Responsibilities:
 

@@ -10,8 +10,9 @@ PROFILE
 Passionate Full Stack Developer experienced in Laravel, WordPress, PHP, JavaScript, responsive web design, and multimedia design.
 
 EXPERIENCE
-Laravel Developer — ecraftz | January 2025–Present
-Web Design Trainer — e-academy | August 2024–Present
+Web Design Faculty — Alpha Digital Academy | February 2026–Present
+Laravel Developer — ecraftz | January 2025–February 2026
+Web Design Trainer — e-academy | August 2024–February 2026
 
 EDUCATION
 Diploma in Multimedia Design — Vismayam College of Arts and Media
