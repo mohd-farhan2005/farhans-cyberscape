@@ -207,37 +207,41 @@ function ProjectsSection() {
 
   return (
     <section id="projects" className="section-shell border-y border-border bg-secondary/10">
-      <SectionTitle index="02" label="Selected Work" title="20 Live Websites & Software Platforms" />
+      <SectionTitle index="02" label="Selected Work" title="Featured Selection (100+ Websites Built)" />
 
       {/* Featured Overview Banner */}
       <Reveal className="mb-12">
         <div className="project-panel group relative overflow-hidden rounded-2xl border border-border/80 bg-card/60 p-8 backdrop-blur-md md:p-12">
           <div className="cyber-grid absolute inset-0 opacity-20" />
-          <div className="relative z-10 grid gap-8 lg:grid-cols-[1.4fr_0.6fr] lg:items-center">
+          <div className="relative z-10 grid gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:items-center">
             <div>
               <span className="eyebrow flex items-center gap-2 text-primary">
                 <Crown className="size-4 text-amber-400" />
-                Commercial Client Portfolio
+                Commercial Client Portfolio (100+ Projects Completed)
               </span>
               <h3 className="mt-4 text-3xl font-semibold leading-tight md:text-5xl">
                 Websites, Premium Portals & Enterprise Software
               </h3>
               <p className="mt-4 text-base leading-relaxed text-muted-foreground md:text-lg">
-                Production-grade commercial solutions engineered across <strong>Laravel, WordPress, PHP, and modern frontend frameworks</strong>—ranging from luxury e-commerce & corporate sites to enterprise CRM systems.
+                Having built <strong>100+ websites and web applications</strong> for diverse clients, here is a curated showcase of 20 live production projects engineered across <strong>Laravel, WordPress, PHP, and modern web tech</strong>.
               </p>
             </div>
-            <div className="grid grid-cols-3 gap-3 font-mono text-center">
-              <div className="rounded-xl border border-border bg-background/50 p-4">
-                <div className="text-2xl font-bold text-primary md:text-3xl">11</div>
-                <div className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">Websites</div>
+            <div className="grid grid-cols-2 gap-3 font-mono text-center sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+              <div className="rounded-xl border border-primary/50 bg-primary/10 p-3 shadow-neon">
+                <div className="text-2xl font-bold text-primary md:text-3xl">100+</div>
+                <div className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground">Total Built</div>
               </div>
-              <div className="rounded-xl border border-border bg-background/50 p-4">
+              <div className="rounded-xl border border-border bg-background/50 p-3">
+                <div className="text-2xl font-bold text-foreground md:text-3xl">20</div>
+                <div className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground">Showcased</div>
+              </div>
+              <div className="rounded-xl border border-border bg-background/50 p-3">
+                <div className="text-2xl font-bold text-emerald-400 md:text-3xl">11</div>
+                <div className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground">Websites</div>
+              </div>
+              <div className="rounded-xl border border-border bg-background/50 p-3">
                 <div className="text-2xl font-bold text-amber-400 md:text-3xl">7</div>
-                <div className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">Premium</div>
-              </div>
-              <div className="rounded-xl border border-border bg-background/50 p-4">
-                <div className="text-2xl font-bold text-cyan-400 md:text-3xl">2</div>
-                <div className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">Software</div>
+                <div className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground">Premium</div>
               </div>
             </div>
           </div>
@@ -568,7 +572,7 @@ export function Portfolio() {
             <p>I transform complex problems into elegant, user-friendly solutions and write clean, maintainable code. My expertise bridges backend development and creative design—building applications that are as functional as they are visually compelling.</p>
           </Reveal>
           <Reveal delay={0.15} className="grid grid-cols-2 border border-border bg-card/50 backdrop-blur-md">
-            {[["01", "Current role"], ["15+", "Core skills"], ["100%", "Curiosity"], ["∞", "Ideas"]].map(([value, label]) => (
+            {[["100+", "Websites Built"], ["20", "Showcased"], ["15+", "Tech Skills"], ["100%", "Quality & Code"]].map(([value, label]) => (
               <div key={label} className="border border-border p-6"><div className="mb-2 text-3xl font-semibold text-primary md:text-4xl">{value}</div><div className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">{label}</div></div>
             ))}
           </Reveal>
