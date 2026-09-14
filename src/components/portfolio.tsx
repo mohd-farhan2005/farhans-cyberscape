@@ -17,6 +17,8 @@ import {
   Mail,
   MapPin,
   Menu,
+  MessageCircle,
+  MessageSquare,
   Phone,
   Search,
   Send,
@@ -173,7 +175,7 @@ function Hero() {
         </div>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }} className="mt-12 grid gap-3 border-t border-border pt-5 font-mono text-xs text-muted-foreground sm:grid-cols-2 lg:grid-cols-4">
           <a href="tel:+916282913275" className="contact-strip"><Phone /> +91 62829 13275</a>
-          <a href="mailto:mohdfarhan170820054@gmail.com" className="contact-strip"><Mail /> Email me</a>
+          <a href="mailto:mohdfarhan17082005@gmail.com" className="contact-strip"><Mail /> Email me</a>
           <a href="https://linkedin.com/in/muhammad-farhan-69603a300" target="_blank" rel="noreferrer" className="contact-strip"><Linkedin /> LinkedIn</a>
           <span className="contact-strip"><MapPin /> Wayanad, Kerala</span>
         </motion.div>
@@ -487,10 +489,58 @@ function ProjectsSection() {
 export function Portfolio() {
   const [sent, setSent] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [lastJson, setLastJson] = useState<string | null>(null);
   const pageRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
-  const submit = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); setSent(true); window.setTimeout(() => setSent(false), 4500); };
+
+  const handleFormSubmit = (event: FormEvent<HTMLFormElement>, targetMethod: "both" | "whatsapp" | "email" = "both") => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const name = (formData.get("name") as string) || "";
+    const email = (formData.get("email") as string) || "";
+    const subject = (formData.get("subject") as string) || "";
+    const message = (formData.get("message") as string) || "";
+
+    const payload = {
+      recipient: "Muhammad Farhan",
+      whatsappNumber: "+916282913275",
+      recipientEmail: "mohdfarhan17082005@gmail.com",
+      senderName: name,
+      senderEmail: email,
+      subject: subject,
+      message: message,
+      timestamp: new Date().toISOString(),
+    };
+
+    const jsonFormatted = JSON.stringify(payload, null, 2);
+    setLastJson(jsonFormatted);
+
+    // Format WhatsApp message text
+    const whatsappText = `📥 *NEW PORTFOLIO INQUIRY*\n\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n📌 *Subject:* ${subject}\n\n💬 *Message:*\n${message}\n\n⚙️ *JSON Payload:*\n\`\`\`json\n${JSON.stringify(payload)}\n\`\`\``;
+    const whatsappUrl = `https://wa.me/916282913275?text=${encodeURIComponent(whatsappText)}`;
+
+    // Format Email mailto URL
+    const mailSubject = `[Portfolio Inquiry] ${subject || "New Message"}`;
+    const mailBody = `New Inquiry from Portfolio:\n\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}\n\n------------------------------\nJSON Payload:\n${jsonFormatted}`;
+    const mailtoUrl = `mailto:mohdfarhan17082005@gmail.com?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+
+    if (targetMethod === "whatsapp") {
+      window.open(whatsappUrl, "_blank");
+    } else if (targetMethod === "email") {
+      window.location.href = mailtoUrl;
+    } else {
+      window.open(whatsappUrl, "_blank");
+      window.setTimeout(() => {
+        window.location.href = mailtoUrl;
+      }, 600);
+    }
+
+    setSent(true);
+    window.setTimeout(() => setSent(false), 7000);
+  };
 
   useEffect(() => {
     const timer = window.setTimeout(() => setLoaded(true), 900);
@@ -585,18 +635,79 @@ export function Portfolio() {
               <p className="mb-8 max-w-md text-lg text-muted-foreground">Have a project, role, or idea in mind? Send a note and let’s start a conversation.</p>
               <div className="space-y-3">
                 <a className="contact-card" href="tel:+916282913275"><Phone /> <span><small>Call</small>+91 62829 13275</span><ArrowUpRight /></a>
-                <a className="contact-card" href="mailto:mohdfarhan170820054@gmail.com"><Mail /> <span><small>Email</small>mohdfarhan170820054@gmail.com</span><ArrowUpRight /></a>
+                <a className="contact-card" href="mailto:mohdfarhan17082005@gmail.com"><Mail /> <span><small>Email</small>mohdfarhan17082005@gmail.com</span><ArrowUpRight /></a>
                 <a className="contact-card" href="https://linkedin.com/in/muhammad-farhan-69603a300" target="_blank" rel="noreferrer"><Linkedin /> <span><small>LinkedIn</small>muhammad-farhan-69603a300</span><ArrowUpRight /></a>
               </div>
               <div className="mt-6 flex items-start gap-3 font-mono text-xs leading-relaxed text-muted-foreground"><MapPin className="mt-0.5 size-4 shrink-0 text-primary" />Mundadathil(H), Tharuvana(P.O), Wayanad</div>
             </Reveal>
             <Reveal delay={0.1}>
-              <form onSubmit={submit} className="contact-form">
-                <div className="grid gap-5 sm:grid-cols-2"><label>Name<input required name="name" placeholder="Your name" /></label><label>Email<input required type="email" name="email" placeholder="you@company.com" /></label></div>
+              <form onSubmit={(e) => handleFormSubmit(e, "both")} className="contact-form">
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <label>Name<input required name="name" placeholder="Your name" /></label>
+                  <label>Email<input required type="email" name="email" placeholder="you@company.com" /></label>
+                </div>
                 <label>Subject<input required name="subject" placeholder="Project enquiry" /></label>
                 <label>Message<textarea required name="message" rows={5} placeholder="Tell me about your project..." /></label>
-                <Button type="submit" variant="neon" size="lg" className="w-full sm:w-auto">{sent ? <><Check /> Message ready</> : <>Send message <Send /></>}</Button>
-                {sent && <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="font-mono text-xs text-primary">Thanks! I’ll get back to you soon.</motion.p>}
+
+                {/* Dispatch Choice Buttons */}
+                <div className="flex flex-wrap items-center gap-3 pt-2">
+                  <Button type="submit" variant="neon" size="lg" className="flex-1 gap-2 font-mono text-xs">
+                    <Send className="size-4" />
+                    <span>Send to Both (WhatsApp + Email)</span>
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outlineNeon"
+                    size="lg"
+                    className="gap-2 font-mono text-xs border-emerald-500/50 text-emerald-400 hover:bg-emerald-950/40"
+                    onClick={(e) => {
+                      const form = e.currentTarget.closest("form");
+                      if (form && form.checkValidity()) {
+                        handleFormSubmit({ preventDefault: () => {}, currentTarget: form } as any, "whatsapp");
+                      } else if (form) {
+                        form.reportValidity();
+                      }
+                    }}
+                  >
+                    <MessageCircle className="size-4 text-emerald-400" />
+                    <span>WhatsApp Only</span>
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outlineNeon"
+                    size="lg"
+                    className="gap-2 font-mono text-xs"
+                    onClick={(e) => {
+                      const form = e.currentTarget.closest("form");
+                      if (form && form.checkValidity()) {
+                        handleFormSubmit({ preventDefault: () => {}, currentTarget: form } as any, "email");
+                      } else if (form) {
+                        form.reportValidity();
+                      }
+                    }}
+                  >
+                    <Mail className="size-4" />
+                    <span>Email Only</span>
+                  </Button>
+                </div>
+
+                {sent && (
+                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-4 rounded-xl border border-primary/40 bg-card/80 p-4 font-mono text-xs text-primary space-y-2">
+                    <div className="flex items-center gap-2 font-bold text-sm">
+                      <Check className="size-4 text-primary" />
+                      <span>Inquiry Sent & Formatted as JSON!</span>
+                    </div>
+                    <p className="text-muted-foreground text-[11px]">
+                      Your message has been dispatched directly to WhatsApp (+91 62829 13275) and Email (mohdfarhan17082005@gmail.com).
+                    </p>
+                    {lastJson && (
+                      <details className="mt-2 text-[10px] text-muted-foreground">
+                        <summary className="cursor-pointer font-bold text-primary hover:underline">View Formatted JSON Payload</summary>
+                        <pre className="mt-2 overflow-x-auto rounded border border-border bg-background p-3 text-[10px] text-primary">{lastJson}</pre>
+                      </details>
+                    )}
+                  </motion.div>
+                )}
               </form>
             </Reveal>
           </div>

@@ -49,7 +49,7 @@ Smooth entrance animations
 Contact Information:
 
 Phone: +91 62829 13275
-Email: mohdfarhan170820054@gmail.com
+Email: mohdfarhan17082005@gmail.com
 LinkedIn: linkedin.com/in/muhammad-farhan-69603a300
 Location: Mundadathil(H), Tharuvana(P.O), Wayanad
 About Me Section
