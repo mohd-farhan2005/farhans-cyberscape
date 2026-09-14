@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { motion, useScroll, useSpring } from "motion/react";
+import { gsap } from "gsap";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -166,12 +167,25 @@ function Hero() {
 
 export function Portfolio() {
   const [sent, setSent] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const pageRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
   const submit = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); setSent(true); window.setTimeout(() => setSent(false), 4500); };
 
+  useEffect(() => {
+    const timer = window.setTimeout(() => setLoaded(true), 900);
+    const onMove = (event: MouseEvent) => {
+      const grid = pageRef.current?.querySelector(".map-grid");
+      if (grid) gsap.to(grid, { x: (event.clientX / window.innerWidth - 0.5) * 16, y: (event.clientY / window.innerHeight - 0.5) * 16, duration: 1.2, ease: "power2.out" });
+    };
+    window.addEventListener("mousemove", onMove);
+    return () => { window.clearTimeout(timer); window.removeEventListener("mousemove", onMove); };
+  }, []);
+
   return (
-    <main className="selection:bg-primary selection:text-primary-foreground">
+    <main ref={pageRef} className="selection:bg-primary selection:text-primary-foreground">
+      {!loaded && <motion.div className="loading-screen" exit={{ opacity: 0 }}><motion.span initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}>MF<span>.</span></motion.span><div className="loading-line"><i /></div></motion.div>}
       <motion.div className="scroll-progress" style={{ scaleX }} />
       <CursorGlow />
       <Header />
