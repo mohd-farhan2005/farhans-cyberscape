@@ -154,10 +154,6 @@ Diploma in Multimedia Design
 
 Vismayam College of Arts and Media
 
-Higher Secondary Education (+2)
-
-SJHSS Kallody
-
 Display as animated cards with glassmorphism effect.
 
 Strengths Section

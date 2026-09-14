@@ -614,12 +614,27 @@ export function Portfolio() {
       </section>
 
       <section id="education" className="section-shell">
-        <SectionTitle index="05" label="Education" title="Where craft met curiosity." />
-        <div className="grid gap-4 md:grid-cols-2">
-          {[["Diploma in Multimedia Design", "Vismayam College of Arts and Media"], ["Higher Secondary Education (+2)", "SJHSS Kallody"]].map(([degree, school], index) => (
-            <Reveal key={degree} delay={index * 0.12}><article className="education-card"><GraduationCap className="size-8 text-primary" /><div><span className="eyebrow">Education 0{index + 1}</span><h3 className="mt-4 text-2xl font-semibold">{degree}</h3><p className="mt-2 text-muted-foreground">{school}</p></div></article></Reveal>
-          ))}
-        </div>
+        <SectionTitle index="05" label="Education" title="Professional Academic Qualification." />
+        <Reveal>
+          <article className="education-card border border-primary/40 bg-card/60 backdrop-blur-md p-8 rounded-2xl relative overflow-hidden">
+            <div className="cyber-grid absolute inset-0 opacity-15" />
+            <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+              <div className="flex items-start gap-5">
+                <div className="p-4 rounded-xl border border-primary/50 bg-primary/10 text-primary shadow-neon">
+                  <GraduationCap className="size-10" />
+                </div>
+                <div>
+                  <span className="eyebrow text-primary font-mono text-xs">Primary Qualification</span>
+                  <h3 className="mt-2 text-2xl md:text-3xl font-semibold">Diploma in Multimedia Design</h3>
+                  <p className="mt-1 text-base text-muted-foreground">Vismayam College of Arts and Media</p>
+                </div>
+              </div>
+              <div className="font-mono text-xs text-primary border border-primary/40 bg-primary/10 px-4 py-2 rounded-full self-start md:self-center">
+                Multimedia & Web Design
+              </div>
+            </div>
+          </article>
+        </Reveal>
       </section>
 
       <section className="section-shell border-y border-border bg-secondary/20">

@@ -16,7 +16,6 @@ Web Design Trainer — e-academy | August 2024–February 2026
 
 EDUCATION
 Diploma in Multimedia Design — Vismayam College of Arts and Media
-Higher Secondary Education (+2) — SJHSS Kallody
 
 SKILLS
 Laravel, WordPress, WordPress Theme Development, PHP, JavaScript, jQuery, HTML5, CSS3, Responsive Web Design, MySQL, Git, Adobe Illustrator, Adobe Photoshop, Adobe Premiere Pro, Blender, CorelDRAW, MS Office
