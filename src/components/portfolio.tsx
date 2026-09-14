@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
+import { motion, useScroll, useSpring } from "motion/react";
 import { gsap } from "gsap";
 import {
   ArrowDown,
@@ -96,24 +96,10 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
 function SectionTitle({ index, label, title }: { index: string; label: string; title: string }) {
   return (
     <Reveal className="mb-12 md:mb-16">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <div className="mb-4 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.24em] text-primary">
-            <span>{index}</span><span className="h-px w-10 bg-primary" />{label}
-          </div>
-          <h2 className="max-w-3xl text-4xl font-semibold leading-tight md:text-6xl">{title}</h2>
-        </div>
-        <Button
-          variant="outlineNeon"
-          size="icon"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          aria-label="Back to top"
-          title="Back to top"
-          className="shrink-0 mt-1 size-10 rounded-xl"
-        >
-          <ArrowUpRight className="-rotate-45 size-4" />
-        </Button>
+      <div className="mb-4 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.24em] text-primary">
+        <span>{index}</span><span className="h-px w-10 bg-primary" />{label}
       </div>
+      <h2 className="max-w-3xl text-4xl font-semibold leading-tight md:text-6xl">{title}</h2>
     </Reveal>
   );
 }
@@ -504,51 +490,7 @@ function ProjectsSection() {
   );
 }
 
-function ScrollToTop() {
-  const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setVisible(true);
-      } else {
-        setVisible(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.7, y: 16 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.7, y: 16 }}
-          transition={{ duration: 0.25, ease: "easeOut" }}
-          className="fixed bottom-6 right-6 z-50 md:bottom-8 md:right-8"
-        >
-          <Button
-            variant="outlineNeon"
-            size="icon"
-            onClick={scrollToTop}
-            aria-label="Back to top"
-            className="size-11 rounded-xl border border-primary/70 bg-background/85 shadow-neon backdrop-blur-md hover:bg-primary/20 hover:shadow-neon-lg active:scale-95 transition-all"
-          >
-            <ArrowUpRight className="-rotate-45 size-5" />
-          </Button>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
 
 export function Portfolio() {
   const [sent, setSent] = useState(false);
