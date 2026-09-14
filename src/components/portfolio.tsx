@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { motion, useScroll, useSpring } from "motion/react";
 import { gsap } from "gsap";
 import {
-  ArrowDown,
   ArrowUpRight,
   BriefcaseBusiness,
   Check,
@@ -168,9 +167,9 @@ function Hero() {
             <p className="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-xl">Building powerful web experiences with clean code, creative design, and modern technologies.</p>
           </div>
           <div className="flex flex-wrap gap-3 md:justify-end">
-            <Button variant="neon" size="lg" asChild><a href="#projects">View Projects <ArrowDown /></a></Button>
+            <Button variant="neon" size="lg" asChild><a href="#projects">View Projects</a></Button>
             <Button variant="outlineNeon" size="lg" asChild><a href="/muhammad-farhan-resume.txt" download>Resume <Download /></a></Button>
-            <Button variant="ghost" size="lg" asChild><a href="#contact">Contact <ArrowUpRight /></a></Button>
+            <Button variant="ghost" size="lg" asChild><a href="#contact">Contact</a></Button>
           </div>
         </div>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }} className="mt-12 grid gap-3 border-t border-border pt-5 font-mono text-xs text-muted-foreground sm:grid-cols-2 lg:grid-cols-4">
@@ -396,7 +395,6 @@ function ProjectsSection() {
                 <Button variant="outlineNeon" size="sm" className="mt-auto w-full justify-center gap-2 font-mono text-xs" asChild>
                   <a href={project.url} target="_blank" rel="noreferrer">
                     <span>Visit Live Site</span>
-                    <ArrowUpRight className="size-3.5" />
                   </a>
                 </Button>
               </div>
@@ -477,7 +475,6 @@ function ProjectsSection() {
                   <Button variant="neon" size="lg" className="mt-6 w-full justify-center gap-2 font-mono text-xs" asChild>
                     <a href={selectedProject.url} target="_blank" rel="noreferrer">
                       <span>Launch Live Website</span>
-                      <ArrowUpRight className="size-4" />
                     </a>
                   </Button>
                 </div>
@@ -655,9 +652,9 @@ export function Portfolio() {
             <Reveal>
               <p className="mb-8 max-w-md text-lg text-muted-foreground">Have a project, role, or idea in mind? Send a note and let’s start a conversation.</p>
               <div className="space-y-3">
-                <a className="contact-card" href="tel:+916282913275"><Phone /> <span><small>Call</small>+91 62829 13275</span><ArrowUpRight /></a>
-                <a className="contact-card" href="mailto:mohdfarhan17082005@gmail.com"><Mail /> <span><small>Email</small>mohdfarhan17082005@gmail.com</span><ArrowUpRight /></a>
-                <a className="contact-card" href="https://linkedin.com/in/muhammad-farhan-69603a300" target="_blank" rel="noreferrer"><Linkedin /> <span><small>LinkedIn</small>muhammad-farhan-69603a300</span><ArrowUpRight /></a>
+                <a className="contact-card" href="tel:+916282913275"><Phone /> <span><small>Call</small>+91 62829 13275</span></a>
+                <a className="contact-card" href="mailto:mohdfarhan17082005@gmail.com"><Mail /> <span><small>Email</small>mohdfarhan17082005@gmail.com</span></a>
+                <a className="contact-card" href="https://linkedin.com/in/muhammad-farhan-69603a300" target="_blank" rel="noreferrer"><Linkedin /> <span><small>LinkedIn</small>muhammad-farhan-69603a300</span></a>
               </div>
               <div className="mt-6 flex items-start gap-3 font-mono text-xs leading-relaxed text-muted-foreground"><MapPin className="mt-0.5 size-4 shrink-0 text-primary" />Mundadathil(H), Tharuvana(P.O), Wayanad</div>
             </Reveal>
