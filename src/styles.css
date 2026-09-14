@@ -79,6 +79,11 @@
 .map-grid { background-image: linear-gradient(30deg, transparent 48%, var(--border) 49%, var(--border) 51%, transparent 52%), linear-gradient(-30deg, transparent 48%, var(--border) 49%, var(--border) 51%, transparent 52%); background-size: 76px 76px; mask-image: radial-gradient(circle at center, black, transparent 72%); }
 .status-dot { width: .5rem; height: .5rem; flex-shrink: 0; border-radius: 999px; background: var(--color-primary); box-shadow: var(--shadow-neon-lg); animation: pulse-dot 1.8s infinite; }
 .scroll-progress { position: fixed; inset: 0 0 auto; z-index: 60; height: 2px; transform-origin: 0%; background: var(--color-primary); box-shadow: var(--shadow-neon-lg); }
+.loading-screen { position: fixed; inset: 0; z-index: 100; display: grid; place-content: center; gap: 1rem; background: var(--color-background); }
+.loading-screen > span { font-size: 3.5rem; font-weight: 700; }
+.loading-screen > span span { color: var(--color-primary); }
+.loading-line { width: 8rem; height: 1px; overflow: hidden; background: var(--color-border); }
+.loading-line i { display: block; width: 45%; height: 100%; background: var(--color-primary); box-shadow: var(--shadow-neon); animation: load-sweep .8s ease-in-out infinite alternate; }
 .contact-strip { display: flex; min-width: 0; align-items: center; gap: .65rem; }
 .contact-strip svg { width: .9rem; color: var(--color-primary); }
 .contact-strip:hover { color: var(--color-primary); }
@@ -110,6 +115,7 @@
 @keyframes pulse-dot { 50% { opacity: .35; transform: scale(.75); } }
 @keyframes particle-float { to { transform: translateY(-50px); opacity: .2; } }
 @keyframes line-flow { to { background-position: -200% 0; } }
+@keyframes load-sweep { to { transform: translateX(125%); } }
 
 @media (min-width: 768px) { .section-shell { padding: 8rem 2rem; } .project-panel { padding: 3.5rem; } .contact-form { padding: 2rem; } .timeline-node { left: -4.54rem; } }
 @media (hover: none), (max-width: 767px) { .cursor-glow { display: none; } }
