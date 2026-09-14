@@ -523,12 +523,12 @@ export function Portfolio() {
     setLastJson(jsonFormatted);
 
     // Format WhatsApp message text
-    const whatsappText = `📥 *NEW PORTFOLIO INQUIRY*\n\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n📌 *Subject:* ${subject}\n\n💬 *Message:*\n${message}\n\n⚙️ *JSON Payload:*\n\`\`\`json\n${JSON.stringify(payload)}\n\`\`\``;
+    const whatsappText = `📥 *NEW PORTFOLIO INQUIRY*\n\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n📌 *Subject:* ${subject}\n\n💬 *Message:*\n${message}`;
     const whatsappUrl = `https://wa.me/916282913275?text=${encodeURIComponent(whatsappText)}`;
 
     // Format Email mailto URL
     const mailSubject = `[Portfolio Inquiry] ${subject || "New Message"}`;
-    const mailBody = `New Inquiry from Portfolio:\n\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}\n\n------------------------------\nJSON Payload:\n${jsonFormatted}`;
+    const mailBody = `📥 NEW PORTFOLIO INQUIRY\n\n👤 Name: ${name}\n📧 Email: ${email}\n📌 Subject: ${subject}\n\n💬 Message:\n${message}`;
     const mailtoUrl = `mailto:mohdfarhan17082005@gmail.com?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
 
     if (targetMethod === "whatsapp") {
@@ -714,17 +714,11 @@ export function Portfolio() {
                   <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-4 rounded-xl border border-primary/40 bg-card/80 p-4 font-mono text-xs text-primary space-y-2">
                     <div className="flex items-center gap-2 font-bold text-sm">
                       <Check className="size-4 text-primary" />
-                      <span>Inquiry Sent & Formatted as JSON!</span>
+                      <span>Inquiry Dispatched Successfully!</span>
                     </div>
                     <p className="text-muted-foreground text-[11px]">
-                      Your message has been dispatched directly to WhatsApp (+91 62829 13275) and Email (mohdfarhan17082005@gmail.com).
+                      Your message has been formatted and sent directly to WhatsApp (+91 62829 13275) and Email (mohdfarhan17082005@gmail.com).
                     </p>
-                    {lastJson && (
-                      <details className="mt-2 text-[10px] text-muted-foreground">
-                        <summary className="cursor-pointer font-bold text-primary hover:underline">View Formatted JSON Payload</summary>
-                        <pre className="mt-2 overflow-x-auto rounded border border-border bg-background p-3 text-[10px] text-primary">{lastJson}</pre>
-                      </details>
-                    )}
                   </motion.div>
                 )}
               </form>
