@@ -7,20 +7,26 @@ import {
   BriefcaseBusiness,
   Check,
   Code2,
+  Crown,
   Download,
+  ExternalLink,
+  Globe,
   GraduationCap,
+  Laptop,
   Linkedin,
   Mail,
   MapPin,
   Menu,
   Phone,
+  Search,
   Send,
   Sparkles,
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { projectsData, type ProjectItem } from "@/data/projects";
 
-const navItems = ["About", "Skills", "Experience", "Education", "Contact"];
+const navItems = ["About", "Projects", "Skills", "Experience", "Education", "Contact"];
 const roles = ["Full Stack Web Developer", "Laravel Developer", "WordPress Developer", "Web Design Faculty"];
 
 const skillGroups = [
@@ -176,6 +182,308 @@ function Hero() {
   );
 }
 
+function ProjectsSection() {
+  const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+
+  const categories = [
+    { label: "All Projects", value: "All", count: projectsData.length },
+    { label: "Premium Websites", value: "Premium Websites", count: projectsData.filter((p) => p.category === "Premium Websites").length },
+    { label: "Websites", value: "Websites", count: projectsData.filter((p) => p.category === "Websites").length },
+    { label: "Software & CRM", value: "Software", count: projectsData.filter((p) => p.category === "Software").length },
+  ];
+
+  const filteredProjects = projectsData.filter((project) => {
+    const matchesCategory = activeCategory === "All" || project.category === activeCategory;
+    const matchesSearch =
+      project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.badge.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.tech.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchesCategory && matchesSearch;
+  });
+
+  return (
+    <section id="projects" className="section-shell border-y border-border bg-secondary/10">
+      <SectionTitle index="02" label="Selected Work" title="20 Live Websites & Software Platforms" />
+
+      {/* Featured Overview Banner */}
+      <Reveal className="mb-12">
+        <div className="project-panel group relative overflow-hidden rounded-2xl border border-border/80 bg-card/60 p-8 backdrop-blur-md md:p-12">
+          <div className="cyber-grid absolute inset-0 opacity-20" />
+          <div className="relative z-10 grid gap-8 lg:grid-cols-[1.4fr_0.6fr] lg:items-center">
+            <div>
+              <span className="eyebrow flex items-center gap-2 text-primary">
+                <Crown className="size-4 text-amber-400" />
+                Commercial Client Portfolio
+              </span>
+              <h3 className="mt-4 text-3xl font-semibold leading-tight md:text-5xl">
+                Websites, Premium Portals & Enterprise Software
+              </h3>
+              <p className="mt-4 text-base leading-relaxed text-muted-foreground md:text-lg">
+                Production-grade commercial solutions engineered across <strong>Laravel, WordPress, PHP, and modern frontend frameworks</strong>—ranging from luxury e-commerce & corporate sites to enterprise CRM systems.
+              </p>
+            </div>
+            <div className="grid grid-cols-3 gap-3 font-mono text-center">
+              <div className="rounded-xl border border-border bg-background/50 p-4">
+                <div className="text-2xl font-bold text-primary md:text-3xl">11</div>
+                <div className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">Websites</div>
+              </div>
+              <div className="rounded-xl border border-border bg-background/50 p-4">
+                <div className="text-2xl font-bold text-amber-400 md:text-3xl">7</div>
+                <div className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">Premium</div>
+              </div>
+              <div className="rounded-xl border border-border bg-background/50 p-4">
+                <div className="text-2xl font-bold text-cyan-400 md:text-3xl">2</div>
+                <div className="mt-1 text-[11px] uppercase tracking-wider text-muted-foreground">Software</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* Filter Tabs & Search */}
+      <Reveal className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-wrap items-center gap-2">
+          {categories.map((cat) => (
+            <button
+              key={cat.value}
+              onClick={() => setActiveCategory(cat.value)}
+              className={`flex items-center gap-2 rounded-full px-4 py-2 font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+                activeCategory === cat.value
+                  ? "bg-primary text-primary-foreground shadow-neon font-bold"
+                  : "border border-border/80 bg-card/40 text-muted-foreground hover:border-primary/50 hover:text-foreground"
+              }`}
+            >
+              <span>{cat.label}</span>
+              <span
+                className={`rounded-full px-2 py-0.5 text-[10px] ${
+                  activeCategory === cat.value ? "bg-primary-foreground/20 text-primary-foreground" : "bg-secondary text-muted-foreground"
+                }`}
+              >
+                {cat.count}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        {/* Search Bar */}
+        <div className="relative w-full sm:w-64">
+          <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+          <input
+            type="text"
+            placeholder="Search projects or tech..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full rounded-full border border-border/80 bg-card/60 py-2 pl-9 pr-4 text-xs font-mono text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
+          />
+          {searchQuery && (
+            <button onClick={() => setSearchQuery("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground hover:text-foreground">
+              <X className="size-3.5" />
+            </button>
+          )}
+        </div>
+      </Reveal>
+
+      {/* Projects Grid */}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {filteredProjects.map((project, idx) => (
+          <Reveal key={project.id} delay={idx * 0.04}>
+            <article className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-border/80 bg-card/60 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/60 hover:shadow-neon">
+              {/* Browser Window Frame Header */}
+              <div className="flex items-center justify-between border-b border-border/80 bg-secondary/40 px-3.5 py-2.5 font-mono text-[11px] text-muted-foreground">
+                <div className="flex items-center gap-1.5">
+                  <span className="size-2.5 rounded-full bg-red-500/80" />
+                  <span className="size-2.5 rounded-full bg-yellow-500/80" />
+                  <span className="size-2.5 rounded-full bg-green-500/80" />
+                </div>
+                <div className="flex items-center gap-1 truncate text-[10px] text-muted-foreground/70 max-w-[170px]">
+                  <Globe className="size-3 shrink-0" />
+                  <span className="truncate">{project.url.replace(/^https?:\/\//, "")}</span>
+                </div>
+                {project.category === "Premium Websites" && (
+                  <span className="flex items-center gap-1 text-[10px] font-semibold text-amber-400" title="Premium Website">
+                    <Crown className="size-3" />
+                  </span>
+                )}
+                {project.category === "Software" && (
+                  <span className="flex items-center gap-1 text-[10px] font-semibold text-cyan-400" title="Software Platform">
+                    <Laptop className="size-3" />
+                  </span>
+                )}
+                {project.category === "Websites" && <span className="size-3" />}
+              </div>
+
+              {/* Website Preview Image Container */}
+              <div
+                className="relative aspect-[16/10] overflow-hidden bg-secondary/30 cursor-pointer"
+                onClick={() => setSelectedProject(project)}
+              >
+                <img
+                  src={`/projects/${project.id}.jpg`}
+                  alt={`${project.title} screenshot`}
+                  className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                  onError={(e) => {
+                    (e.target as HTMLElement).style.display = "none";
+                    const parent = (e.target as HTMLElement).parentElement;
+                    if (parent) {
+                      parent.classList.add("flex", "items-center", "justify-center", "bg-gradient-to-br", "from-secondary", "to-card");
+                    }
+                  }}
+                />
+
+                {/* Overlay Badge */}
+                <div className="absolute left-3 top-3 z-10">
+                  <span
+                    className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 font-mono text-[10px] uppercase font-semibold backdrop-blur-md ${
+                      project.category === "Premium Websites"
+                        ? "border-amber-500/40 bg-amber-950/70 text-amber-300"
+                        : project.category === "Software"
+                        ? "border-cyan-500/40 bg-cyan-950/70 text-cyan-300"
+                        : "border-primary/40 bg-background/80 text-primary"
+                    }`}
+                  >
+                    {project.badge}
+                  </span>
+                </div>
+
+                {/* Hover overlay hint */}
+                <div className="absolute inset-0 flex items-center justify-center bg-background/60 opacity-0 backdrop-blur-xs transition-opacity duration-300 group-hover:opacity-100">
+                  <span className="flex items-center gap-2 rounded-full border border-primary bg-primary/20 px-4 py-2 font-mono text-xs font-semibold text-primary shadow-neon">
+                    View Details
+                  </span>
+                </div>
+              </div>
+
+              {/* Card Body */}
+              <div className="flex flex-1 flex-col p-5">
+                <div className="mb-2 flex items-start justify-between gap-2">
+                  <h4 className="text-xl font-semibold text-foreground transition-colors group-hover:text-primary">
+                    {project.title}
+                  </h4>
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-border/80 bg-secondary/30 text-muted-foreground transition-all duration-300 hover:border-primary hover:bg-primary hover:text-primary-foreground"
+                    title={`Visit ${project.title}`}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <ExternalLink className="size-4" />
+                  </a>
+                </div>
+
+                <p className="mb-4 flex-1 text-xs leading-relaxed text-muted-foreground line-clamp-3">
+                  {project.description}
+                </p>
+
+                {/* Tech Stack Pills */}
+                <div className="mb-4 flex flex-wrap gap-1.5">
+                  {project.tech.map((t) => (
+                    <span key={t} className="rounded border border-border/60 bg-secondary/40 px-2 py-0.5 font-mono text-[10px] text-muted-foreground">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Action button */}
+                <Button variant="outlineNeon" size="sm" className="mt-auto w-full justify-center gap-2 font-mono text-xs" asChild>
+                  <a href={project.url} target="_blank" rel="noreferrer">
+                    <span>Visit Live Site</span>
+                    <ArrowUpRight className="size-3.5" />
+                  </a>
+                </Button>
+              </div>
+            </article>
+          </Reveal>
+        ))}
+      </div>
+
+      {/* Lightbox Modal */}
+      {selectedProject && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 p-4 backdrop-blur-md"
+          onClick={() => setSelectedProject(null)}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl"
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b border-border bg-secondary/40 px-6 py-4">
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-xs uppercase tracking-widest text-primary">{selectedProject.category}</span>
+                <h3 className="text-xl font-bold">{selectedProject.title}</h3>
+              </div>
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="rounded-full border border-border p-1.5 text-muted-foreground hover:bg-secondary hover:text-foreground"
+              >
+                <X className="size-5" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="overflow-y-auto p-6">
+              <div className="mb-6 overflow-hidden rounded-xl border border-border bg-black">
+                <img
+                  src={`/projects/${selectedProject.id}.jpg`}
+                  alt={selectedProject.title}
+                  className="w-full object-contain max-h-[50vh]"
+                />
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-[1.5fr_1fr]">
+                <div>
+                  <h4 className="mb-2 text-sm font-mono uppercase tracking-wider text-muted-foreground">About the Project</h4>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{selectedProject.description}</p>
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {selectedProject.tech.map((t) => (
+                      <span key={t} className="rounded-full border border-primary/40 bg-primary/10 px-3 py-1 font-mono text-xs text-primary">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex flex-col justify-between rounded-xl border border-border/80 bg-secondary/20 p-5">
+                  <div className="space-y-3 font-mono text-xs">
+                    <div>
+                      <span className="text-muted-foreground block text-[10px] uppercase">Category</span>
+                      <span className="font-semibold text-foreground">{selectedProject.category}</span>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground block text-[10px] uppercase">Badge</span>
+                      <span className="font-semibold text-primary">{selectedProject.badge}</span>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground block text-[10px] uppercase">Live Address</span>
+                      <a href={selectedProject.url} target="_blank" rel="noreferrer" className="text-primary underline truncate block">
+                        {selectedProject.url}
+                      </a>
+                    </div>
+                  </div>
+
+                  <Button variant="neon" size="lg" className="mt-6 w-full justify-center gap-2 font-mono text-xs" asChild>
+                    <a href={selectedProject.url} target="_blank" rel="noreferrer">
+                      <span>Launch Live Website</span>
+                      <ArrowUpRight className="size-4" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </section>
+  );
+}
+
 export function Portfolio() {
   const [sent, setSent] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -217,20 +525,7 @@ export function Portfolio() {
         </div>
       </section>
 
-      <section id="projects" className="section-shell border-y border-border bg-secondary/20">
-        <SectionTitle index="02" label="Selected work" title="Engineered for impact." />
-        <Reveal>
-          <div className="project-panel group">
-            <div className="cyber-grid absolute inset-0 opacity-25" />
-            <div className="relative z-10 max-w-2xl">
-              <span className="eyebrow">Development focus</span>
-              <h3 className="mt-5 text-3xl font-semibold md:text-5xl">Scalable digital experiences</h3>
-              <p className="mt-5 max-w-xl text-muted-foreground">Laravel applications, bespoke WordPress themes, Core PHP solutions, and responsive interfaces built around real client needs.</p>
-            </div>
-            <Code2 className="relative z-10 size-20 text-primary transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110 md:size-28" />
-          </div>
-        </Reveal>
-      </section>
+      <ProjectsSection />
 
       <section id="skills" className="section-shell">
         <SectionTitle index="03" label="Capabilities" title="A full-stack creative toolkit." />
