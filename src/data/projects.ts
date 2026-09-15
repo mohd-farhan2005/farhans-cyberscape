@@ -26,9 +26,9 @@ export const projectsData: ProjectItem[] = [
     title: "Art Nouveau",
     url: "https://artnouveau.ezyplus.in/",
     category: "Premium Websites",
-    badge: "Laravel E-Commerce",
+    badge: "Laravel Interior Design",
     tech: ["Laravel", "PHP", "Custom Theme", "MySQL"],
-    description: "High-end luxury decor and fine art platform built on Laravel with curated collections, interactive showcases, and custom order handling.",
+    description: "High-end architecture, luxury decor, and interior design showcase built on Laravel featuring interactive project portfolios, spatial galleries, and consultation workflows.",
     featured: true,
   },
   {
